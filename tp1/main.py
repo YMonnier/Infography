@@ -1,14 +1,14 @@
+#!/usr/bin/python2.7
+# -*- coding: utf-8 -*-
+
 import cng
 from include.utilities.util import init_viewport, \
     init_window, \
     Point, \
-    window_viewport_mapping
+    window_viewport_mapping, \
+    draw_point
 
 if __name__ == '__main__':
-    print 'test...'
-    W_WIDTH = 800
-    W_HEIGHT = 800
-
     # Window bottom left corner coordinates.
     W_MIN = Point(0, 0)
     # Window top right corner coordinates.
@@ -25,8 +25,8 @@ if __name__ == '__main__':
 
     p = Point(700, 20)
 
-    cng.point(p.x, p.y)
+    draw_point(p)
     new_p = window_viewport_mapping(p, W_MIN, W_MAX, V_MIN, V_MAX)
-    cng.point(new_p.x, new_p.y)
+    draw_point(new_p)
 
     cng.main_loop()
