@@ -19,7 +19,7 @@ def default(point):
     x, y = 0, 0
     while x <= point.x:
         yield Point(x, y)
-        #res.append(Point(x, y))
+        # res.append(Point(x, y))
         if dec < 0:
             dec += 2 * point.x
             y += 1
@@ -78,3 +78,46 @@ def two_octant(point):
                 y += 1
             dec -= 2 * point.y
             x += 1
+
+
+'''
+Generic bresenham implementation.
+Can draw segment with any coordinates.
+    (xa, ya): ordinate point.
+    (xb, yb): target point.
+'''
+
+
+def generic(pointA, pointB):
+    dx = pointB.x - pointA.x
+    dy = pointB.y - pointA.y
+    x, y = pointA.x, pointA.y
+
+    x_direc = 1 if dx > 0 else -1  # move up or move down
+    y_direc = 1 if dy > 0 else -1  # move up or move down
+
+    dx = abs(pointB.x - pointA.x)
+    dy = abs(pointB.y - pointA.y)
+
+    if dy > dx:
+        diff = dy
+        dec = dy - 2 * dx
+        dy = y + dy
+        for i in range(diff):
+            yield Point(x, y)
+            if dec < 0:
+                dec += 2 * dy
+                x += x_direc
+            dec -= 2 * dx
+            y += y_direc
+    else:
+        diff = dx
+        dec = dx - 2 * dy
+        dx = x + dx
+        for i in range(diff):
+            yield Point(x, y)
+            if dec < 0:
+                dec += 2 * dx
+                y += y_direc
+            dec -= 2 * dy
+            x += x_direc

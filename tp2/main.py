@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import cng
+import time
 from include.utilities.util import init_viewport, \
     init_window, \
     draw_mapping_point, \
@@ -28,18 +29,44 @@ if __name__ == '__main__':
     # Bresenham tests
     #
 
+    # Start timer
+    start_time = time.time()
 
     # Default | from (0,0) to (50, 50)
-    draw_mapping_list_point(bresenham.default(Point(50, 50)),
-                            W_MIN, W_MAX, V_MIN, V_MAX)
+    # draw_mapping_list_point(bresenham.default(Point(50, 50)),
+    #                        W_MIN, W_MAX, V_MIN, V_MAX)
 
     # Advanced | from point A to point B, first octant
-    draw_mapping_list_point(bresenham.advanced(Point(100, 100), Point(500, 500)),
-                            W_MIN, W_MAX, V_MIN, V_MAX)
+    # draw_mapping_list_point(bresenham.advanced(Point(100, 100), Point(500, 500)),
+    #                        W_MIN, W_MAX, V_MIN, V_MAX)
     # Advanced | from (0, 0) to point B, first and second octant.
-    draw_mapping_list_point(bresenham.two_octant(Point(10, 500)),
+    # draw_mapping_list_point(bresenham.two_octant(Point(10, 500)),
+    #                        W_MIN, W_MAX, V_MIN, V_MAX)
+
+    # Generic | from any point to any point
+    draw_mapping_list_point(bresenham.generic(Point(400, 400), Point(500, 700)),
                             W_MIN, W_MAX, V_MIN, V_MAX)
 
+    draw_mapping_list_point(bresenham.generic(Point(400, 400), Point(700, 500)),
+                            W_MIN, W_MAX, V_MIN, V_MAX)
 
+    draw_mapping_list_point(bresenham.generic(Point(400, 400), Point(700, 300)),
+                            W_MIN, W_MAX, V_MIN, V_MAX)
 
+    draw_mapping_list_point(bresenham.generic(Point(400, 400), Point(500, 100)),
+                            W_MIN, W_MAX, V_MIN, V_MAX)
+
+    draw_mapping_list_point(bresenham.generic(Point(400, 400), Point(300, 100)),
+                            W_MIN, W_MAX, V_MIN, V_MAX)
+
+    draw_mapping_list_point(bresenham.generic(Point(400, 400), Point(100, 300)),
+                            W_MIN, W_MAX, V_MIN, V_MAX)
+
+    draw_mapping_list_point(bresenham.generic(Point(400, 400), Point(100, 500)),
+                            W_MIN, W_MAX, V_MIN, V_MAX)
+
+    draw_mapping_list_point(bresenham.generic(Point(400, 400), Point(300, 700)),
+                            W_MIN, W_MAX, V_MIN, V_MAX)
+
+    print("	==> Execution time: %s seconds" % ((time.time() - start_time)))
     cng.main_loop()
