@@ -1,7 +1,8 @@
 import cng
 from include.utilities.util import init_viewport, \
     init_window, \
-    Point
+    Point, \
+    window_viewport_mapping
 
 if __name__ == '__main__':
     print 'test...'
@@ -21,5 +22,11 @@ if __name__ == '__main__':
     # Viewport top right corner coordinates.
     V_MAX = Point(600, 600)
     init_viewport(V_MIN, V_MAX, 1)
+
+    p = Point(700, 20)
+
+    cng.point(p.x, p.y)
+    new_p = window_viewport_mapping(p, W_MIN, W_MAX, V_MIN, V_MAX)
+    cng.point(new_p.x, new_p.y)
 
     cng.main_loop()
