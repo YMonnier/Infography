@@ -36,7 +36,7 @@ def init_viewport(pMin, pMax, size):
 
     Convert a point from continuous state space to discrete.
 
-    point: Point to map.
+    point: Point to map. (couple of abscissa and ordinate(x, y))
     wMin: window bottom left corner coordinates
     wMax: window top rigth corner coordinates
     vMin: viewport bottom left corner coordinates
@@ -50,16 +50,16 @@ def window_viewport_mapping(point, wMin, wMax, vMin, vMax):
     yv = vMax.y - vMin.y
     yw = wMax.y - wMin.y
 
-    x = int(point.x * (xv / float(xw)) + (xv * (-wMin.x)) + vMin.x)
-    y = int(point.y * (yv / float(yw)) + (yv * (-wMin.y)) + vMin.y)
+    x = int(point[0] * (xv / float(xw)) + (xv * (-wMin.x)) + vMin.x)
+    y = int(point[1] * (yv / float(yw)) + (yv * (-wMin.y)) + vMin.y)
 
-    return Point(x, y)
+    return (x, y)
 
 
 '''
     Apply window viewport mapping from a list of point.
 
-    list: List of Point
+    list: List of couple of abscissa and ordinate(x, y)
     wMin: window bottom left corner coordinates
     wMax: window top rigth corner coordinates
     vMin: viewport bottom left corner coordinates
@@ -68,14 +68,16 @@ def window_viewport_mapping(point, wMin, wMax, vMin, vMax):
 
 
 def draw_mapping_list_point(list, wMin, wMax, vMin, vMax):
-    map(lambda p: draw_mapping_point(p, wMin, wMax, vMin, vMax),
-        list)
+    for p in list:
+        draw_mapping_point(p, wMin, wMax, vMin, vMax)
+        # map(lambda p: draw_mapping_point(p, wMin, wMax, vMin, vMax),
+        #    list)
 
 
 '''
     Draw a point with the window viewport mapping.
 
-    point: Point to display.
+    point: Point to display, couple of abscissa and ordinate(x, y).
     wMin: window bottom left corner coordinates
     wMax: window top rigth corner coordinates
     vMin: viewport bottom left corner coordinates
@@ -84,9 +86,9 @@ def draw_mapping_list_point(list, wMin, wMax, vMin, vMax):
 
 
 def draw_mapping_point(point, wMin, wMax, vMin, vMax):
-    point = window_viewport_mapping(point, wMin, wMax, vMin, vMax)
-    cng.point(point.x, point.y)
+    (x, y) = window_viewport_mapping(point, wMin, wMax, vMin, vMax)
+    cng.point(x, y)
 
 
 def draw_point(point):
-    cng.point(point.x, point.y)
+    cng.point(point[0], point[1])

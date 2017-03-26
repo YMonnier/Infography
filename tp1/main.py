@@ -23,8 +23,7 @@ if __name__ == '__main__':
     V_MAX = Point(600, 600)
     init_viewport(V_MIN, V_MAX, 1)
 
-    p = Point(700, 20)
-
+    p = (700, 20)
     draw_point(p)
     new_p = window_viewport_mapping(p, W_MIN, W_MAX, V_MIN, V_MAX)
     draw_point(new_p)
