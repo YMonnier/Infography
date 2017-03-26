@@ -32,6 +32,40 @@ def init_viewport(pMin, pMax, size):
 
 
 '''
+    Draw a polynomial curve.
+
+    xmin: x min abscissa.
+    xmax: x max abscissa.
+    size: Number of point.
+    coeffs: Polynomial coefficients.
+'''
+
+
+def polynome(xmin, xmax, size, coeffs):
+    step = (xmax - xmin) / float(size)
+    x_i = xmin
+    while x_i < xmax:
+        y = __horner(x_i, coeffs)
+        yield (x_i, y)
+        x_i += step
+
+
+'''
+    Horner function.
+
+    factor: Factor.
+    coeffs: List of coefficient.
+'''
+
+
+def __horner(factor, coeffs):
+    res = coeffs[0]
+    for a in range(1, len(coeffs) - 1):
+        res = res * factor + coeffs[a]
+    return res
+
+
+'''
     window_viewport_mapping function.
 
     Convert a point from continuous state space to discrete.

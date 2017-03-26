@@ -6,7 +6,9 @@ from include.utilities.util import init_viewport, \
     init_window, \
     Point, \
     window_viewport_mapping, \
-    draw_point
+    draw_mapping_list_point, \
+    draw_point, \
+    polynome
 
 if __name__ == '__main__':
     # Window bottom left corner coordinates.
@@ -27,5 +29,7 @@ if __name__ == '__main__':
     draw_point(p)
     new_p = window_viewport_mapping(p, W_MIN, W_MAX, V_MIN, V_MAX)
     draw_point(new_p)
+
+    draw_mapping_list_point(polynome(10, 250, 5000, [3, 3, 20]), W_MIN, W_MAX, V_MIN, V_MAX)
 
     cng.main_loop()
