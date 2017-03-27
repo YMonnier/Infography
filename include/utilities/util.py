@@ -90,6 +90,11 @@ def window_viewport_mapping(point, wMin, wMax, vMin, vMax):
     return (x, y)
 
 
+def mapping_list_point(list, wMin, wMax, vMin, vMax):
+    return map(lambda p: window_viewport_mapping(p, wMin, wMax, vMin, vMax),
+        list)
+
+
 '''
     Apply window viewport mapping from a list of point.
 
