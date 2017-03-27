@@ -1,45 +1,68 @@
 #!/usr/bin/python2.7
 # -*- coding: utf-8 -*-
+import cng
 
 
-def factorial(n):
+def __factorial(n):
     res = 1
     for i in range(1, n + 1):
         res *= i
     return res
 
 
-# Calcul de B_(n,p) (t) le p-eme polynome de Bernstein d'ordre n, en t
-def bernstein(n, p, t):
-    result = factorial(n) / (factorial(p) * factorial(n - p)) * t ** p * (1 - t) ** (n - p)
+'''
+    Bernstein function
+    Calculate the berstein p-eme polynom
+    with the order n in t.
+
+    p: polynome number
+    n: order
+    t
+
+'''
+
+
+def __bernstein(n, p, t):
+    result = __factorial(n) / (__factorial(p) * __factorial(n - p)) * t ** p * (1 - t) ** (n - p)
     return result
 
 
-# Calcul du point sur la courbe de Bezier s'appuyant sur les points du tableau points en u
-def calcPoint(u, points):
-    res = 0
-    for i in range(len(points)):
-        res += (bernstein(len(points), i, u) * points[i])
-    return res
+'''
+    Calculate the points on curve bezier.
+'''
 
 
-def execute(myXs, myYs):
-    xCurb = []
-    yCurb = []
+def __compute_point(position, points):
+    x, y = 0, 0
+    size = len(points)
+    for i in range(size):
+        x += (__bernstein(size - 1, i, position) * points[i][0])
+        y += (__bernstein(size - 1, i, position) * points[i][1])
+    return x, y
 
-    # pas du trace entre 0 et 1
-    pas = 0.01
 
+'''
+    Execute the Bezier algorithm
+    points: Control points.
+'''
+
+
+def execute(points):
+    step = 0.01
     k = 0
+    while k < 1:
+        yield __compute_point(k, points)
+        k += step
 
-    # On fait varier le param de trace entre 0 et 1
-    while (k < 1):
-        # Calcul du point de la courbe en k
-        x = calcPoint(k, myXs)
-        y = calcPoint(k, myYs)
 
-        # On ajoute les points calcules dans la liste des points de la courbe
-        #xCurb.append(x)
-        #yCurb.append(y)
-        yield (x, y)
-        k += pas
+'''
+    Draw the curve Bezier
+
+    points: Bezier points.
+'''
+
+
+def display(points):
+    for i in range(len(points) - 1):
+        cng.line(points[i][0], points[i][1],
+                 points[i + 1][0], points[i + 1][1])

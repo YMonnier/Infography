@@ -24,14 +24,11 @@ if __name__ == '__main__':
     V_MAX = Point(600, 600)
     init_viewport(V_MIN, V_MAX, 1)
 
-    # Coordonnees en x puis en y des points d'appui de la courbe a tracer
-    myXs = [200, 200, 600, 600]
-    myYs = [200, 600, 600, 200]
-
-    points = mapping_list_point(bezier.execute(myXs, myYs),
+    # Control points
+    controls = [(0,0), (0, 800), (800, 800), (800, 0)]
+    points = mapping_list_point(bezier.execute(controls),
                                 W_MIN, W_MAX, V_MIN, V_MAX)
-    print points
-    for i in range(len(points) - 1):
-        cng.line(points[i][0], points[i][1], points[i + 1][0], points[i + 1][1])
+    bezier.display(points)
+
 
     cng.main_loop()
