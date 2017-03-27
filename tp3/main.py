@@ -25,10 +25,8 @@ if __name__ == '__main__':
     init_viewport(V_MIN, V_MAX, 1)
 
     # Control points
-    controls = [(0,0), (0, 800), (800, 800), (800, 0)]
-    points = mapping_list_point(bezier.execute(controls),
-                                W_MIN, W_MAX, V_MIN, V_MAX)
-    bezier.display(points)
-
+    controls = [(0, 0), (0, 800), (800, 800), (800, 0)]
+    bezier.execute(controls,
+                   W_MIN, W_MAX, V_MIN, V_MAX)
 
     cng.main_loop()

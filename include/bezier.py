@@ -1,6 +1,7 @@
 #!/usr/bin/python2.7
 # -*- coding: utf-8 -*-
 import cng
+from utilities.util import mapping_list_point
 
 
 def __factorial(n):
@@ -43,26 +44,25 @@ def __compute_point(position, points):
 
 '''
     Execute the Bezier algorithm
+
     points: Control points.
+    wMin: window bottom left corner coordinates
+    wMax: window top rigth corner coordinates
+    vMin: viewport bottom left corner coordinates
+    vMax: viewport top rigth corner coordinates
 '''
 
 
-def execute(points):
+def execute(points,
+            wMin, wMax, vMin, vMax):
+    points = mapping_list_point(points,
+                                wMin, wMax, vMin, vMax)
     step = 0.01
     k = 0
+    res = []
     while k < 1:
-        yield __compute_point(k, points)
+        res.append(__compute_point(k, points))
         k += step
-
-
-'''
-    Draw the curve Bezier
-
-    points: Bezier points.
-'''
-
-
-def display(points):
-    for i in range(len(points) - 1):
-        cng.line(points[i][0], points[i][1],
-                 points[i + 1][0], points[i + 1][1])
+    for i in range(len(res) - 1):
+        cng.line(res[i][0], res[i][1],
+                 res[i + 1][0], res[i + 1][1])

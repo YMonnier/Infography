@@ -87,7 +87,7 @@ def window_viewport_mapping(point, wMin, wMax, vMin, vMax):
     x = int(point[0] * (xv / float(xw)) + (xv * (-wMin.x)) + vMin.x)
     y = int(point[1] * (yv / float(yw)) + (yv * (-wMin.y)) + vMin.y)
 
-    return (x, y)
+    return x, y
 
 
 def mapping_list_point(list, wMin, wMax, vMin, vMax):
