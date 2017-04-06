@@ -26,7 +26,9 @@ if __name__ == '__main__':
 
     # Control points
     controls = [(0, 0), (0, 800), (800, 800), (800, 0)]
-    bezier.execute(controls,
+    #bezier.execute_bernstein(controls,
+    #                         W_MIN, W_MAX, V_MIN, V_MAX)
+    bezier.execute_casteljau(controls,
                    W_MIN, W_MAX, V_MIN, V_MAX)
 
     cng.main_loop()
